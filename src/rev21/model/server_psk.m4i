@@ -5,7 +5,8 @@ define(<!ClientHelloExtensions!>, <!< dnl
   KeyShareCH, dnl
   PskKeyExchangeModes, dnl
   EarlyDataIndication, dnl
-  PreSharedKeyExtensionCH dnl
+  PreSharedKeyExtensionCH, dnl
+  CertWithExternPsk dnl
 >!>)
 rule recv_client_hello_psk:
 let
@@ -29,8 +30,8 @@ let
     psk_ke_mode = <psk_ke, psk_dhe_ke> dnl <'0', '1'>
     edi = new_edi
 
-    // Abstract client identity - does not currently correspond to 
-    // anything concrete 
+    // Abstract client identity - does not currently correspond to
+    // anything concrete
     // From the server's perspective: associate with an open socket.
     C = $C
 
@@ -76,7 +77,8 @@ define(<!ServerHelloExtensions!>, <!< dnl
   SignatureSchemeList, dnl
   KeyShareSH, dnl
   PreSharedKeyExtensionSH, dnl
-  EarlyDataIndication dnl
+  EarlyDataIndication, dnl
+  CertWithExternPsk dnl
 >!>)
 rule server_hello_psk_dhe:
 let
@@ -123,7 +125,8 @@ in
 define(<!ServerHelloExtensions!>, <!< dnl
   SignatureSchemeList, dnl
   PreSharedKeyExtensionSH, dnl
-  EarlyDataIndication dnl
+  EarlyDataIndication, dnl
+  CertWithExternPsk dnl
 >!>)
 rule server_hello_psk:
 let

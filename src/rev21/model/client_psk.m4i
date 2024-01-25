@@ -31,7 +31,8 @@ define(<!ClientHelloExtensions!>, <!< dnl
   KeyShareCH, dnl
   PskKeyExchangeModes, dnl
   EarlyDataIndication, dnl
-  PreSharedKeyExtensionCH dnl
+  PreSharedKeyExtensionCH, dnl
+  CertWithExternPsk dnl
 >!>)
 rule client_hello_psk:
 let
@@ -48,8 +49,8 @@ let
     obfuscated_ticket_age = mask(ticket_age_add, $ticket_age)
     identities = <<ticket, obfuscated_ticket_age>>
 
-    // Abstract client identity - does not currently correspond to 
-    // anything concrete 
+    // Abstract client identity - does not currently correspond to
+    // anything concrete
     C = $C
 
     // Server identity - can be interpreted as the hostname
@@ -167,7 +168,8 @@ define(<!ServerHelloExtensions!>, <!< dnl
   SignatureSchemeList, dnl
   KeyShareSH, dnl
   PreSharedKeyExtensionSH, dnl
-  EarlyDataIndication dnl
+  EarlyDataIndication, dnl
+  CertWithExternPsk dnl
 >!>)
 rule recv_server_hello_psk_dhe:
 let
@@ -210,7 +212,8 @@ in
 define(<!ServerHelloExtensions!>, <!< dnl
   SignatureSchemeList, dnl
   PreSharedKeyExtensionSH, dnl
-  EarlyDataIndication dnl
+  EarlyDataIndication, dnl
+  CertWithExternPsk dnl
 >!>)
 rule recv_server_hello_psk:
 let
